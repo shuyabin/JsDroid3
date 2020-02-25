@@ -62,6 +62,20 @@ cd d:/project
 jsd create helloworld
 
 ```
+
+#### 项目结构
+
+```
+|-- 项目路径
+  |-- src
+    |-- MainScript.groovy 脚本入口
+  |-- res
+    |-- option.json 配置
+    |-- readme.md 帮助
+  |-- config.json 项目参数
+  |-- icon.png 项目图标，建议1024x1024格式图片
+```
+
 #### 编译项目
 ```
 d:
@@ -94,18 +108,6 @@ jsd pack
 打包成功后得到文件：d:/project/helloworld/dist/helloworld.apk
 
 
-#### 项目结构
-
-```
-|-- 项目路径
-  |-- src
-    |-- MainScript.groovy 脚本入口
-  |-- res
-    |-- option.json 配置
-    |-- readme.md 帮助
-  |-- config.json 项目参数
-  |-- icon.png 项目图标，建议1024x1024格式图片
-```
 
 
 #### 常用命令
