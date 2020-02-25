@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <bytecodeTargetLevel>
+      <module name="api" target="1.7" />
+      <module name="app-hidden-api" target="1.7" />
+      <module name="groovy" target="1.7" />
+      <module name="ipc" target="1.7" />
+      <module name="java-utils" target="1.7" />
+      <module name="sdk" target="1.7" />
+      <module name="sdk9" target="1.7" />
+      <module name="server" target="1.7" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

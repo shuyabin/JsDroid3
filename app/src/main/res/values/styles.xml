@@ -1,0 +1,32 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="QMUI.Compat">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">#2962FF</item>
+        <item name="colorPrimaryDark">#0D47A1</item>
+        <item name="colorAccent">#64B5F6</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+
+
+        <!-- New MaterialComponents attributes. -->
+
+    </style>
+
+    <style name="Material" parent="Theme.MaterialComponents.Light.Bridge" >
+        <item name="colorPrimary">#2962FF</item>
+        <item name="colorPrimaryDark">#0D47A1</item>
+        <item name="colorAccent">#64B5F6</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+</resources>

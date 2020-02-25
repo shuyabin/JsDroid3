@@ -1,0 +1,45 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+ext {
+    BUILD_TEMPLATE = false
+    JSDROID_VERSION_CODE = 117
+    JSDROID_VERSION = "3.0"
+    JSDROID_SERVER_VERSION = "2019072323"
+    SUPER_USER_VERSION = "1.0.0.201811281328"
+    FAST_JSON_VERSION = "1.2.58"
+    COMMONS_IO_VERSION = "1.3.2"
+
+}
+buildscript {
+    ext {
+        kotlin_version = '1.3.61'
+    }
+    repositories {
+        mavenLocal()
+        google()
+        jcenter()
+        maven { url 'https://jitpack.io' }
+        
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.4.2'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath 'androidx.navigation:navigation-safe-args-gradle-plugin:2.2.1'
+
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+allprojects {
+    repositories {
+        mavenLocal()
+        google()
+        jcenter()
+        maven { url 'https://jitpack.io' }
+        
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}

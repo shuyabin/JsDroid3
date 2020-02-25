@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">JsDroid</string>
+    <string name="app_desc">JsDroid3.0全新版本正在开发中，敬请期待！\n\ntips：等待服务启动后，请按音量-键启动测试脚本~</string>
+    <string name="app_note">本软件用于测试3.0版本兼容性，用于判断您的手机在3.0版本是否兼容。
+        \n如果您的手机有root，则软件会自动启动服务；
+        \n如果您的手机没有root，请按照以下步骤进行操作：
+        \n\t1.开启usb调试模式，连接电脑;
+        \n\t2.电脑安装adb工具;
+        \n\t3.在cmd命令窗口输入：d:\\adb安装路径\\adb.exe tcpip 5555。
+
+    </string>
+</resources>

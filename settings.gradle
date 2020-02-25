@@ -1,0 +1,6 @@
+include ':server-apk', ':ipc',
+        ':api', ':groovy', ':app', ':runner', ':app-hidden-api'
+rootProject.name = 'JsDroid3'
+
+//include ':api28'
+//project(':api28').projectDir=(new File("D:\\develop\\android\\android-api\\api28"))

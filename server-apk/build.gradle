@@ -1,0 +1,103 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 27
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+
+    defaultConfig {
+        applicationId "com.jsdroid.server_apk"
+        minSdkVersion 19
+        targetSdkVersion 27
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        //配置编译方式
+        externalNativeBuild {
+            ndkBuild {
+                //一般真机cpu架构是arm
+                abiFilters 'armeabi-v7a'
+                //模拟器是x86
+                abiFilters 'x86'
+            }
+        }
+        //配置 打包（决定包在什么平台可以运行）
+        ndk {
+            //一般真机cpu架构是arm
+            abiFilters 'armeabi-v7a'
+            //模拟器是x86
+            abiFilters 'x86'
+        }
+    }
+//    externalNativeBuild {
+//        ndkBuild {
+//            path 'jni/Android.mk'
+//        }
+//    }
+    externalNativeBuild {
+        ndkBuild {
+            path 'jni/Android.mk'
+        }
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    sourceSets {
+        main {
+            //so库路径
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+    lintOptions {
+        abortOnError false
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    compileOnly project(":ipc")
+    compileOnly project(":api")
+    implementation project(":groovy")
+    implementation 'com.google.android.tools:dx:1.7'
+    compileOnly files("sdk/sdk19-1.0.jar")
+    compileOnly(files("../libs/android.jar"))
+    implementation(files("../libs/groovy.jar"))
+    implementation "org.apache.commons:commons-io:1.3.2"
+    implementation "org.jsoup:jsoup:1.11.3"
+    //server
+    implementation 'com.koushikdutta.async:androidasync:2.+'
+    implementation "com.alibaba:fastjson:$FAST_JSON_VERSION"
+    implementation project(":app-hidden-api")
+
+}
+build.doLast {
+    //将build之后的apk复制到runner/src/main/res/raw/server.apk
+    project.buildOutputs.forEach({
+        v ->
+            if (v.name == "release") {
+                copy {
+                    from(v.outputFile)
+                    into(new File(project.rootDir, "runner/src/main/res/raw"))
+                    rename {
+                        oldName ->
+                            "server.apk"
+                    }
+                }
+            }
+
+    })
+}
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}

@@ -1,0 +1,71 @@
+远程调用
+1.实现远程执行方法
+2.支持自定义数据序列化
+
+问题一：
+    socket之间通信太麻烦，每条指令都要写个请求头，写太多api太累。
+问题二：
+    传统json传输数据，不支持图片之类的数据，传输数据有些棘手。
+
+1.自定义数据
+public class Image implements Data {
+    public String getData;
+    public byte[] image;
+    //自定义写数据，需要和read里面的读数据顺序一致，否则序列化会失败
+    @Override
+    public void write(Output output) throws IOException {
+        output.write(getData);
+        output.write(image);
+    }
+
+    @Override
+    public void read(Input input) throws IOException, InstantiationException, IllegalAccessException, ClassNotFoundException {
+        getData = input.read();
+        image = input.read();
+    }
+}
+
+2.定义服务接口
+interface IService {
+    void readImage(ICallback onKeyEventListener);
+}
+3.定义Call
+interface ICallback extends Call {
+    void onReceive(Image image);
+}
+
+4.客户端接收图片
+class Callback implements ICallback {
+    public void onReceive(Image image) {
+        System.out.println(image.getData);
+        System.out.println(image.image.length);
+    }
+}
+5.服务器返回图片
+class ServiceImpl implements IService {
+
+    @Override
+    public void readImage(ICallback onKeyEventListener) {
+        Image image = new Image();
+        image.getData = "image";
+        image.image = new byte[]{0,1,2,3,4,5,6};
+        onKeyEventListener.onReceive(image);
+    }
+
+}
+//服务端
+public class Server {
+    public static void main(String[] args) {
+        Ipc.Server server = Ipc.startServer(9800);
+        server.addService("image server", new ServiceImpl());
+    }
+}
+
+//客户端
+public class Client {
+    public static void main(String[] args) throws IOException {
+        Ipc.Client client = Ipc.connectServer("127.0.0.1", 9800);
+        IService service = client.getService("image server", IService.class);
+        service.readImage(new Callback());
+    }
+}
